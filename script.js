@@ -16,7 +16,7 @@ const afunction = (function () {
     let player2Moves = [];
 
     let winLines = [
-        [0,1,2],
+        ['0','1','2'],
         [0,3,6],
         [0,4,8],
         [1,4,7],
@@ -43,10 +43,17 @@ const afunction = (function () {
                     
                     box.textContent = player1.mark;
                     player1Moves.push(box.id);
-                    console.log(player1Moves);
+                    console.log(player1Moves.sort());
                     player1.turn = false;
                     player2.turn = true;
 
+                    console.log(winLines)
+                    
+
+                    const test = winLines.every(value => {
+                        return player1Moves.includes(value);
+                    })
+                    console.log(test)
                     
                 }
 
@@ -54,7 +61,7 @@ const afunction = (function () {
 
                     box.textContent = player2.mark;
                     player2Moves.push(box.id);
-                    console.log(player2Moves);
+                    console.log(player2Moves.sort());
                     player1.turn = true;
                     player2.turn = false;
                 }
@@ -63,14 +70,15 @@ const afunction = (function () {
                     return
                 }
 
+
 /*                if (player1Moves.length > 4) {
 
                     console.log('now');
             
                     for (let i = 0; i< winLines.length; i++) {
                         const possible = winLines[i];
-                        let player1Check = possible.every((item) => player1Moves.includes(item));
-                        let player2Check = possible.every((item) => player2Moves.includes(item));
+                        let player1Check = possible.every((item) => player1Moves.sort().includes(item));
+                        let player2Check = possible.every((item) => player2Moves.sort().includes(item));
             
                         console.log(player1Check);
                         console.log(player2Check);
