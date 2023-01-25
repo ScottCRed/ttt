@@ -1,15 +1,26 @@
 /* eslint-disable */
 
-let board = ['X', 'O', 'O', 'X', 'O', 'X', 'O' , 'X', 'O'];
-let count = 0
+const afunction = (function () {
+
+    let board = [];
 
 const container = document.querySelector('#container');
 
-for (let i = 0; i < board.length; i++) { 
-    console.log(board[i])
-    const box = document.createElement('div');
-    box.classList.add('box');
-    box.textContent = board[i];
+    for (let i = 0; i < 9; i++) { 
+        board.push('');
+    }
 
-    container.appendChild(box);
-}
+    board.forEach((item, index) => {
+        const box =  document.createElement('div');
+        box.classList.add('box');
+        container.appendChild(box);
+        box.addEventListener('click', () => { 
+            box.textContent = index;
+        });
+    });
+    
+    function playerClick () {
+        
+    }
+
+})();
