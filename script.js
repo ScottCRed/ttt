@@ -16,12 +16,12 @@ const afunction = (function () {
     let player2Moves = [];
 
     let winLines = [
-        ['0','1','2'],
+        [0,1,2],
         [0,3,6],
         [0,4,8],
         [1,4,7],
         [2,5,8],
-        [2,4,6],
+        [2,4,7],
         [3,4,5],
         [6,7,8],
     ]
@@ -43,16 +43,12 @@ const afunction = (function () {
                     
                     box.textContent = player1.mark;
                     player1Moves.push(box.id);
-                    console.log(player1Moves.sort());
+                    console.log(winLines.toString());
                     player1.turn = false;
-                    player2.turn = true;
+                    player2.turn = true;                    
 
-                    console.log(winLines)
-                    
+                    const test = winLines.toString().includes(player1Moves.toString());
 
-                    const test = winLines.every(value => {
-                        return player1Moves.includes(value);
-                    })
                     console.log(test)
                     
                 }
