@@ -11,6 +11,20 @@ const afunction = (function () {
 
     
     let board = [];
+    let count = 0;
+    let player1Moves = [];
+    let player2Moves = [];
+
+    let winLines = [
+        [0,1,2],
+        [0,3,6],
+        [0,4,8],
+        [1,4,7],
+        [2,5,8],
+        [2,4,6],
+        [3,4,5],
+        [6,7,8],
+    ]
 
     const container = document.querySelector('#container');
 
@@ -21,40 +35,53 @@ const afunction = (function () {
         board.forEach((item, index) => {
             const box =  document.createElement('div');
             box.classList.add('box');
+            box.setAttribute('id', count++)
             container.appendChild(box);
             box.addEventListener('click', () => { 
-
-
+               
                 if (player1.turn===true && box.textContent === '') {
-                    console.log(player1)
-                    console.log(player2)
+                    
                     box.textContent = player1.mark;
-
+                    player1Moves.push(box.id);
+                    console.log(player1Moves);
                     player1.turn = false;
                     player2.turn = true;
-                    console.log(player1.turn)
-                    console.log(player2.turn)
+
+                    
                 }
 
                 else if (player2.turn===true && box.textContent === '') {
-                    console.log(player1)
-                    console.log(player2)
-                    box.textContent = player2.mark;
 
+                    box.textContent = player2.mark;
+                    player2Moves.push(box.id);
+                    console.log(player2Moves);
                     player1.turn = true;
                     player2.turn = false;
-                    console.log(player1.turn)
-                    console.log(player2.turn)
                 }
 
                 else {
                     return
                 }
+
+/*                if (player1Moves.length > 4) {
+
+                    console.log('now');
+            
+                    for (let i = 0; i< winLines.length; i++) {
+                        const possible = winLines[i];
+                        let player1Check = possible.every((item) => player1Moves.includes(item));
+                        let player2Check = possible.every((item) => player2Moves.includes(item));
+            
+                        console.log(player1Check);
+                        console.log(player2Check);
+                    }
+                }
+            
+                else {
+                    return
+                }
+*/                
         });
     });
-    
-    function playerClick () {
-        
-    }
 
 })();
