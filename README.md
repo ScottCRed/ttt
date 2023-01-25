@@ -31,3 +31,8 @@ Restart/start:
 
 - Renders clear game board
 - Presented as start button on initial screen and then as restart button on the game screen.
+
+
+Problems:
+
+- figure out how to compare palyermoves and winLines to create winstate
