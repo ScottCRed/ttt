@@ -2,15 +2,42 @@
 
 const playerProps = (name, mark, turn) => {
     return {name, mark, turn}
-}
+};
 
-const player1 = playerProps ('Scott', 'X', true);
-const player2 = playerProps ('Dean', 'O', false);
+
+const start = (function (){
+   
+    function closeStart () {
+        const close = document.querySelector('.startPage');
+        close.style.zIndex = '-1'
+    }
+
+    function addPlayers () {
+        event.preventDefault()
+        const player1 = playerProps (form.player1Select.value, 'X', true);
+        const player2 = playerProps (form.player2Select.value, 'O', false);
+
+        const newPlayer1 = document.querySelector('.player1Card')
+        newPlayer1.textContent = player1.name;
+
+        
+        const newPlayer2 = document.querySelector('.player2Card')
+        newPlayer2.textContent = player2.name;
+
+        closeStart();
+    }
+
+    const newPlayerClick = document.querySelector('.submit-button');
+        newPlayerClick.addEventListener('click', addPlayers);
+
+        
+})();
 
 const game = (function () {
    
     let board = [];
-
+    const newPlayer1 = playerProps (form.player1Select.value, 'X', true);
+    const newPlayer2 = playerProps (form.player1Select.value, 'O', true);
     const container = document.querySelector('#container');
 
         for (let i = 0; i < 9; i++) { 
@@ -22,21 +49,22 @@ const game = (function () {
             box.classList.add('box');
             container.appendChild(box);
             box.addEventListener('click', () => { 
-               
-                if (player1.turn===true && box.textContent === '') {
+               console.log('hey')
+               console.log(newPlayer1)
+               console.log(newPlayer2)
+                if (newPlayer1.turn===true && box.textContent === '') {
                     
-                    box.textContent = player1.mark;
-                    player1.turn = false;
-                    player2.turn = true;                    
-
+                    box.textContent = newPlayer1.mark;
+                    newPlayer1.turn = false;
+                    newPlayer2.turn = true;                    
                     winState()                    
                 }
 
-                else if (player2.turn===true && box.textContent === '') {
+                else if (newPlayer2.turn===true && box.textContent === '') {
 
-                    box.textContent = player2.mark;
-                    player1.turn = true;
-                    player2.turn = false;
+                    box.textContent = newPlayer2.mark;
+                    newPlayer1.turn = true;
+                    newPlayer2.turn = false;
 
                     winState()
                 }
@@ -74,14 +102,14 @@ function winState () {
 
         if (isWinCombo) {
             winner = true
-            const winner1 = document.querySelector('.player1')
-            const winner2 = document.querySelector('.player2')
-            if (player1.turn != true) {
-                winner1.textContent = player1.name + ' is the winner!'
+            const winner1 = document.querySelector('.player1Card')
+            const winner2 = document.querySelector('.player2Card')
+            if (newPlayer1.turn != true) {
+                winner1.textContent = newPlayer1.name + ' is the winner!'
             }
 
-            else if (player2.turn != true) {
-                winner2.textContent = player2.name + ' is the winner!'
+            else if (newPlayer2.turn != true) {
+                winner2.textContent = newPlayer2.name + ' is the winner!'
             };
         };
     });
