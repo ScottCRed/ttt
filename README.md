@@ -36,3 +36,4 @@ Restart/start:
 Problems:
 
 - figure out how to compare palyermoves and winLines to create winstate
+- solution = compare textContent of boxes using object index positions i.e check if position 0 = position 1 and if position 1 = position 2 at reference [0,1,2] 
