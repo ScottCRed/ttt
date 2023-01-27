@@ -74,13 +74,14 @@ function winState () {
 
         if (isWinCombo) {
             winner = true
-            
+            const winner1 = document.querySelector('.player1')
+            const winner2 = document.querySelector('.player2')
             if (player1.turn != true) {
-                console.log(player1.name, 'wins')
+                winner1.textContent = player1.name + ' is the winner!'
             }
 
             else if (player2.turn != true) {
-                console.log(player2.name, 'wins')
+                winner2.textContent = player2.name + ' is the winner!'
             };
         };
     });
