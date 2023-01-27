@@ -6,38 +6,46 @@ const playerProps = (name, mark, turn) => {
 
 
 const start = (function (){
-   
+
+    function startGame () {
+        
+        addPlayers()
+        const player1 = playerProps (form.player1Select.value, 'X', true);
+        const player2 = playerProps (form.player2Select.value, 'O', false);
+        closeStart()
+        console.log(player1)
+        console.log(player2)
+    };
+
     function closeStart () {
         const close = document.querySelector('.startPage');
         close.style.zIndex = '-1'
-    }
+    };
 
     function addPlayers () {
         event.preventDefault()
+
         const player1 = playerProps (form.player1Select.value, 'X', true);
         const player2 = playerProps (form.player2Select.value, 'O', false);
-
         const newPlayer1 = document.querySelector('.player1Card')
         newPlayer1.textContent = player1.name;
 
         
         const newPlayer2 = document.querySelector('.player2Card')
         newPlayer2.textContent = player2.name;
-
-        closeStart();
-    }
+    };
 
     const newPlayerClick = document.querySelector('.submit-button');
-        newPlayerClick.addEventListener('click', addPlayers);
-
-        
+        newPlayerClick.addEventListener('click', startGame);
+       
+        return 
 })();
 
 const game = (function () {
    
     let board = [];
-    const newPlayer1 = playerProps (form.player1Select.value, 'X', true);
-    const newPlayer2 = playerProps (form.player1Select.value, 'O', true);
+    //const player1 = playerProps (form.player1Select.value, 'X', true);
+    //const player2 = playerProps (form.player2Select.value, 'O', false);
     const container = document.querySelector('#container');
 
         for (let i = 0; i < 9; i++) { 
@@ -50,8 +58,8 @@ const game = (function () {
             container.appendChild(box);
             box.addEventListener('click', () => { 
                console.log('hey')
-               console.log(newPlayer1)
-               console.log(newPlayer2)
+               console.log(player1)
+               console.log(player2)
                 if (newPlayer1.turn===true && box.textContent === '') {
                     
                     box.textContent = newPlayer1.mark;
