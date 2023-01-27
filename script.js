@@ -7,16 +7,6 @@ const playerProps = (name, mark, turn) => {
 
 const start = (function (){
 
-    function startGame () {
-        
-        addPlayers()
-        const player1 = playerProps (form.player1Select.value, 'X', true);
-        const player2 = playerProps (form.player2Select.value, 'O', false);
-        closeStart()
-        console.log(player1)
-        console.log(player2)
-    };
-
     function closeStart () {
         const close = document.querySelector('.startPage');
         close.style.zIndex = '-1'
@@ -33,10 +23,12 @@ const start = (function (){
         
         const newPlayer2 = document.querySelector('.player2Card')
         newPlayer2.textContent = player2.name;
+
+        closeStart()
     };
 
     const newPlayerClick = document.querySelector('.submit-button');
-        newPlayerClick.addEventListener('click', startGame);
+        newPlayerClick.addEventListener('click', addPlayers);
        
         return 
 })();
@@ -44,13 +36,19 @@ const start = (function (){
 const game = (function () {
    
     let board = [];
-    //const player1 = playerProps (form.player1Select.value, 'X', true);
-    //const player2 = playerProps (form.player2Select.value, 'O', false);
+    const playerProps = (name, mark, turn) => {
+        return {name, mark, turn}
+    };
+    const player1 = playerProps (form.player1Select.value, 'X', true);
+    const player2 = playerProps (form.player2Select.value, 'O', false);
+
     const container = document.querySelector('#container');
 
         for (let i = 0; i < 9; i++) { 
          board.push('');
         }
+
+
 
         board.forEach((item, index) => {
             const box =  document.createElement('div');
@@ -60,19 +58,19 @@ const game = (function () {
                console.log('hey')
                console.log(player1)
                console.log(player2)
-                if (newPlayer1.turn===true && box.textContent === '') {
+                if (player1.turn===true && box.textContent === '') {
                     
-                    box.textContent = newPlayer1.mark;
-                    newPlayer1.turn = false;
-                    newPlayer2.turn = true;                    
+                    box.textContent = player1.mark;
+                    player1.turn = false;
+                    player2.turn = true;                    
                     winState()                    
                 }
 
-                else if (newPlayer2.turn===true && box.textContent === '') {
+                else if (player2.turn===true && box.textContent === '') {
 
-                    box.textContent = newPlayer2.mark;
-                    newPlayer1.turn = true;
-                    newPlayer2.turn = false;
+                    box.textContent = player2.mark;
+                    player1.turn = true;
+                    player2.turn = false;   
 
                     winState()
                 }
