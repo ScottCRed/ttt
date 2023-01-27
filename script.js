@@ -15,6 +15,11 @@ const afunction = (function () {
     let player1Moves = [];
     let player2Moves = [];
 
+function winState () {
+    let winner = false;
+    this.positions = Array.from(document.querySelectorAll('.box'));
+    const positions = this.positions;
+
     let winLines = [
         [0,1,2],
         [0,3,6],
@@ -25,6 +30,22 @@ const afunction = (function () {
         [3,4,5],
         [6,7,8],
     ]
+
+    winLines.forEach((winCombo) => {
+        const pos0InnerText = positions[winCombo[0]].innerText;
+        const pos1InnerText = positions[winCombo[1]].innerText;
+        const pos2InnerText = positions[winCombo[2]].innerText;
+        const isWinCombo = pos0InnerText != '' &&
+        pos0InnerText === pos1InnerText && 
+        pos1InnerText === pos2InnerText
+
+        if (isWinCombo) {
+            winner = true
+            console.log('did it work')
+        }
+    })
+
+}
 
     const container = document.querySelector('#container');
 
@@ -46,7 +67,7 @@ const afunction = (function () {
                     player1.turn = false;
                     player2.turn = true;                    
 
-
+                    winState()
                     
                 }
 
@@ -56,6 +77,8 @@ const afunction = (function () {
                     player2Moves.push(box.id);
                     player1.turn = true;
                     player2.turn = false;
+
+                    winState()
                 }
 
                 else {
