@@ -36,9 +36,6 @@ const start = (function (){
 const game = (function () {
    
     let board = [];
-    const playerProps = (name, mark, turn) => {
-        return {name, mark, turn}
-    };
     const player1 = playerProps (form.player1Select.value, 'X', true);
     const player2 = playerProps (form.player2Select.value, 'O', false);
 
@@ -47,8 +44,6 @@ const game = (function () {
         for (let i = 0; i < 9; i++) { 
          board.push('');
         }
-
-
 
         board.forEach((item, index) => {
             const box =  document.createElement('div');
@@ -59,6 +54,9 @@ const game = (function () {
                console.log(player1)
                console.log(player2)
                 if (player1.turn===true && box.textContent === '') {
+                    
+                    player1.name = form.player1Select.value;
+                    player2.name = form.player2Select.value;
                     
                     box.textContent = player1.mark;
                     player1.turn = false;
@@ -110,12 +108,12 @@ function winState () {
             winner = true
             const winner1 = document.querySelector('.player1Card')
             const winner2 = document.querySelector('.player2Card')
-            if (newPlayer1.turn != true) {
-                winner1.textContent = newPlayer1.name + ' is the winner!'
+            if (player1.turn != true) {
+                winner1.textContent = player1.name + ' is the winner!'
             }
 
-            else if (newPlayer2.turn != true) {
-                winner2.textContent = newPlayer2.name + ' is the winner!'
+            else if (player2.turn != true) {
+                winner2.textContent = player2.name + ' is the winner!'
             };
         };
     });
