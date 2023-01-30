@@ -15,14 +15,12 @@ const start = (function (){
     function addPlayers () {
         event.preventDefault()
 
-        const player1 = playerProps (form.player1Select.value, 'X', true);
-        const player2 = playerProps (form.player2Select.value, 'O', false);
         const newPlayer1 = document.querySelector('.player1Card')
-        newPlayer1.textContent = player1.name;
+        newPlayer1.textContent = form.player1Select.value;
 
         
         const newPlayer2 = document.querySelector('.player2Card')
-        newPlayer2.textContent = player2.name;
+        newPlayer2.textContent = form.player2Select.value;
 
         closeStart()
     };
@@ -36,6 +34,8 @@ const start = (function (){
 const game = (function () {
    
     let board = [];
+    let moves = [];
+    let winner = false;
     const player1 = playerProps (form.player1Select.value, 'X', true);
     const player2 = playerProps (form.player2Select.value, 'O', false);
 
@@ -50,22 +50,21 @@ const game = (function () {
             box.classList.add('box');
             container.appendChild(box);
             box.addEventListener('click', () => { 
-               console.log('hey')
-               console.log(player1)
-               console.log(player2)
-                if (player1.turn===true && box.textContent === '') {
-                    
+
+                if (player1.turn===true && box.textContent === '' && winner != true) {
+                    moves.push(player1.mark);
                     player1.name = form.player1Select.value;
                     player2.name = form.player2Select.value;
                     
                     box.textContent = player1.mark;
                     player1.turn = false;
-                    player2.turn = true;                    
+                    player2.turn = true;            
+                    console.log(moves)        
                     winState()                    
                 }
 
-                else if (player2.turn===true && box.textContent === '') {
-
+                else if (player2.turn===true && box.textContent === '' && winner != true) {
+                    moves.push(player2.mark);
                     box.textContent = player2.mark;
                     player1.turn = true;
                     player2.turn = false;   
@@ -81,9 +80,11 @@ const game = (function () {
     });
 
 function winState () {
-    let winner = false;
+    
     this.positions = Array.from(document.querySelectorAll('.box'));
     const positions = this.positions;
+    const winner1 = document.querySelector('.player1Card')
+    const winner2 = document.querySelector('.player2Card')
 
     let winLines = [
         [0,1,2],
@@ -106,19 +107,22 @@ function winState () {
 
         if (isWinCombo) {
             winner = true
-            const winner1 = document.querySelector('.player1Card')
-            const winner2 = document.querySelector('.player2Card')
+
             if (player1.turn != true) {
-                winner1.textContent = player1.name + ' is the winner!'
+                winner1.textContent = player1.name + ' is the winner!';
             }
 
             else if (player2.turn != true) {
-                winner2.textContent = player2.name + ' is the winner!'
-            };
-        };
-    });
+                winner2.textContent = player2.name + ' is the winner!';
+            }            
+        }
+        else if (moves.length === 9 && winner === false ){
+            winner1.textContent = "It'\s a draw!";
+            winner2.textContent = "It'\s a draw!";
+            }
+        });
 
-}
+    };
 
 })();
 
