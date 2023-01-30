@@ -59,7 +59,7 @@ const game = (function () {
                     box.textContent = player1.mark;
                     player1.turn = false;
                     player2.turn = true;            
-                    console.log(moves)        
+                         
                     winState()                    
                 }
 
